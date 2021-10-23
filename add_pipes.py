@@ -1,10 +1,11 @@
 
-# step 1: copy to new google sheet, with updated version number (eg. 1.0.1)
-# step 1: Copy two columns into new excel spreadsheet. Include all gaps
-# step 2: Copy text, paste into txt document
+# step 1: copy working google sheet to new google sheet, with updated version number (eg. 1.0.1)
+# step 2: Copy two columns into new excel spreadsheet. Include all gaps
+# step 3: Copy text, paste into txt document
 # The repo only has the latest 2 docs, one excel and one txt
 # The Daddy should have these two, PLUS a full record of versions for excel and txt
-# step 3: Replace the <tab> that follows the pair (ex. AB) with a <space>. I forget how I did this. I should have included that in this script
+# step 4: Replace the <tab> that follows the pair (ex. AB) with a <space>. I forget how I did this. I should have included that in this script. Oh, maybe i 
+#   went back and included it. 
 # Now you're ready for this Python script...
 
 # NOTICE: each line ends with a RETURN character.  I don't know if that's a good or bad thing, but it affects my indexing in some places.  
@@ -174,7 +175,7 @@ def format_and_reduce_white_space(lines: "list[str]"):
 
 
     # eliminate rows where pair is a double, like AA and BB.
-    # Be excluding lines beginning with ' ', we get rid of (1) the rows with "Letter Clarity, no flea" AND (2)the empty rows, which apparently begin with a space
+    # By excluding lines beginning with ' ', we get rid of (1) the rows with "Letter Clarity, no flea" AND (2)the empty rows, which apparently begin with a space (hmm, maybe because i replaced the tab with a space)
     lines2 = []
 
     for line in lines:
@@ -239,5 +240,13 @@ with open('sentences_576_1.0.1.txt') as file:
     lines = add_pipes(lines)
 
 
-    for line in lines[0:100]:
+    for line in lines[500:576]:
         print(line)
+
+with open('pipes_576.csv', 'a', encoding='utf-8') as outputFile:
+
+    outputFile.write('letter-pair|sentence|synopsis|cross-definition|pronunciation|location|tableau|backstory\n')
+
+    for line in lines:
+
+        outputFile.write(line)
