@@ -227,7 +227,7 @@ def examine_syntax(lines: "list[str]"):
         
 
 # to print whole console:  flush=True
-with open('sentences_576_1.0.1.txt') as file:
+with open('sentences-576_11-8-2021_1-0-2.txt') as file:
 
     lines = file.readlines()
 
