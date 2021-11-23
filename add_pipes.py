@@ -257,7 +257,7 @@ with open('sentences-576_11-23-2021_1-0-3.txt') as file:
 
 with open('pipes_576.csv', 'a', encoding='utf-8') as outputFile:
 
-    outputFile.write('letter-pair|sentence|synopsis|cross-definition|pronunciation|location|tableau|backstory\n')
+    outputFile.write('letter_pair|sentence|synopsis|cross_definition|pronunciation|location|tableau|backstory\n')
 
     for line in lines:
 
