@@ -1,12 +1,14 @@
 
 # step 1: copy working google sheet to new google sheet, with updated version number (eg. 1.0.1)
 # step 2: Copy two columns into new excel spreadsheet. Include all gaps
-# step 3: Copy text, paste into txt document
-# The repo only has the latest 2 docs, one excel and one txt
-# The Daddy should have these two, PLUS a full record of versions for excel and txt
-# step 4: Replace the <tab> that follows the pair (ex. AB) with a <space>. I forget how I did this. I should have included that in this script. Oh, maybe i 
-#   went back and included it. 
-# Now you're ready for this Python script...
+# step 3: At this time, create new subfolder in version_storage, place excel file in it, with appropriate name
+# step 4: Copy excel text, paste into txt document, put that new doc into sentences-five-seven-six, deleting the old one
+# step 5: in Python script, type in the correct input file name (the new txt file)
+# step 6: delete the current pipes_576.csv file
+# step 7: Run the script
+# step 8: Place txt file and csv file into today's new version_storage subfolder
+# Between runs, there should typically be 3 files at the root folder:  The python script, the latest txt input file, and the latest csv output file.
+#     -The txt and csv files should be duplicates of the corresponding files in the latest subfolder of version_storage. 
 
 # NOTICE: each line ends with a RETURN character.  I don't know if that's a good or bad thing, but it affects my indexing in some places.  
 
@@ -133,6 +135,14 @@ def remove_spaces_around_pipes(line: str):
         line = line.replace(' |', '|')
 
     return line
+
+
+def replace_double_quotes_with_single(line: str):
+
+    while '"' in line:
+        line = line.replace('"', "'")
+
+    return line
     
 
 def add_pipes(lines: "list[str]"):
@@ -154,6 +164,8 @@ def add_pipes(lines: "list[str]"):
         line = remove_spaces_around_pipes(line)
 
         line = add_final_null(line)
+
+        line = replace_double_quotes_with_single(line)
 
         # DO NOT COMMENT OUT:
         lines2.append(line)
@@ -227,7 +239,7 @@ def examine_syntax(lines: "list[str]"):
         
 
 # to print whole console:  flush=True
-with open('sentences-576_11-8-2021_1-0-2.txt') as file:
+with open('sentences-576_11-23-2021_1-0-3.txt') as file:
 
     lines = file.readlines()
 
