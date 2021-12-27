@@ -12,6 +12,14 @@
 
 # NOTICE: each line ends with a RETURN character.  I don't know if that's a good or bad thing, but it affects my indexing in some places.  
 
+# 12-26-2021:  Starting with version_storage>1_0_4  there are 2 extra files:  a json, and a commas_576.csv.  
+# -- The json file seems like a smart idea since I use a json file in the mobile app and may use one in various future places.
+# -- The commas file is due to no longer using pipes moving into the future.  
+
+# I think after today (12-26-2021) I may no longer have ANY NEED for this python script, since I'll be operating from 
+# a csv-type format from the get-go.  That is, my data fields will be in different columns of the google doc, instead of 
+# being delineated by the janky { },  # #,  etc.
+
 def add_null_pipe(line: str):
     
     tempList = list(line)
@@ -126,6 +134,17 @@ def add_seventh_pipe(line: str):
 
     return line
 
+def add_eighth_pipe(line: str):
+
+    if '| #' in line:
+        line = line.replace('| #', '|')
+        line = line.replace('#', '|', 1)
+
+    else: 
+
+        line = add_null_pipe(line)
+
+    return line
 
 def remove_spaces_around_pipes(line: str):
 
@@ -160,6 +179,8 @@ def add_pipes(lines: "list[str]"):
         line = add_sixth_pipe(line)
 
         line = add_seventh_pipe(line)
+
+        line = add_eighth_pipe(line)
 
         line = remove_spaces_around_pipes(line)
 
@@ -239,7 +260,7 @@ def examine_syntax(lines: "list[str]"):
         
 
 # to print whole console:  flush=True
-with open('sentences-576_11-23-2021_1-0-3.txt') as file:
+with open('sentences-576_12-26-2021_1-0-4.txt') as file:
 
     lines = file.readlines()
 
@@ -257,7 +278,7 @@ with open('sentences-576_11-23-2021_1-0-3.txt') as file:
 
 with open('pipes_576.csv', 'a', encoding='utf-8') as outputFile:
 
-    outputFile.write('letter_pair|sentence|synopsis|cross_definition|pronunciation|location|tableau|backstory\n')
+    outputFile.write('letter_pair|sentence|synopsis|cross_definition|pronunciation|location|tableau|group|backstory\n')
 
     for line in lines:
 
