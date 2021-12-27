@@ -20,6 +20,9 @@
 # a csv-type format from the get-go.  That is, my data fields will be in different columns of the google doc, instead of 
 # being delineated by the janky { },  # #,  etc.
 
+# 12-26-2021  NOTE:   Using 1_0_4, i created a new version 1.1.0.  The change from janky { } to columns was significant enough
+# to merit a change to the middle number. 
+
 def add_null_pipe(line: str):
     
     tempList = list(line)
