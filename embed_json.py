@@ -1,5 +1,7 @@
-# Creates a new file with different structure for each object (dictionary)
-# need to right-click and format new file after running this program to create it
+# Reads json file that was made using cloud conversion from a flat csv (that was made from the working google sheet doc)
+# Takes each of 676 dictionaries in array and gives it a new embedded structure that is desired in the database
+# Makes a new json object and creates a file for it
+# after running this program, need to open newly created file and right-click and format it
 
 import json
 import copy
