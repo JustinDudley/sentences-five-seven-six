@@ -19,35 +19,26 @@ sentences.forEach(sentence => {
     sentence.group = groupArr
     sentencesGroupIsAnArray.push(sentence)
 })
-// NOW I have a good array of sentences, called sentencesGroupIsAnArray
 
 
-// 2. 
-
-
-
-
+// 2. Create finalSentences array
 const finalSentences = []
 
-// for (const outerSentence of sentencesGroupIsAnArray) {
-
 sentencesGroupIsAnArray.forEach(outerSentence => {
-
-    if (outerSentence.letter_pair === "BC") {
-        let biggerGroup = [];
-        sentencesGroupIsAnArray.forEach(innerSentence => {
-            if(innerSentence.group.includes('bc')) {
-                console.log('innerSentence is: ', innerSentence)
-                biggerGroup.push.apply(biggerGroup, innerSentence.group)
-                biggerGroup = [...new Set(biggerGroup)];
-
-            }
-        })
-
-        delete outerSentence.group;
-        outerSentence.group = biggerGroup
-        finalSentences.push(outerSentence)
-    }
+    let biggerGroup = [];
+    sentencesGroupIsAnArray.forEach(innerSentence => {
+        if(innerSentence.group.includes(outerSentence.letter_pair.toLowerCase())) {
+            biggerGroup.push.apply(biggerGroup, innerSentence.group)
+            biggerGroup = [...new Set(biggerGroup)];
+        }
+    })
+    finalSentences.push({letter_pair: outerSentence.letter_pair, group: biggerGroup})
+      
 });
 
-console.log(finalSentences[0])
+
+// write finalSentences to file
+fs.writeFile('groups.output.json', JSON.stringify(finalSentences), function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  });
