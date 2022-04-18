@@ -38,7 +38,7 @@ sentencesGroupIsAnArray.forEach(outerSentence => {
 
 
 // write finalSentences to file
-fs.writeFile('groups.output.json', JSON.stringify(finalSentences), function (err) {
+fs.writeFile('groups-output.json', JSON.stringify(finalSentences), function (err) {
     if (err) throw err;
     console.log('Saved!');
   });
