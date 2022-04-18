@@ -2,6 +2,7 @@
 // To add all known associations of a given letter_pair to the group for that letter_pair.
 // So:  We look at letter_pair YQ.  Who is yq known to associate with?  That is, in what groups is yq found?
 // collect all the letter_pairs with which yq is found.  Remove duplicates. Add this list of letter_pairs to the group for yq
+// This process will pick up all associations of a letter_pair EVEN IF THE ORIGINAL LETTER_PAIR GROUP IS A BLANK FIELD.
 
 const fs = require('fs');
 
