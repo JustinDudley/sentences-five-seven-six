@@ -1,3 +1,8 @@
+// Purpose:
+// To add all known associations of a given letter_pair to the group for that letter_pair.
+// So:  We look at letter_pair YQ.  Who is yq known to associate with?  That is, in what groups is yq found?
+// collect all the letter_pairs with which yq is found.  Remove duplicates. Add this list of letter_pairs to the group for yq
+
 const fs = require('fs');
 
 const data = fs.readFileSync('./groups-input.json', 'utf-8');
@@ -22,7 +27,7 @@ sentences.forEach(sentence => {
 
 
 // 2. Create finalSentences array
-const finalSentences = []
+const almostFinalSentences = []
 
 sentencesGroupIsAnArray.forEach(outerSentence => {
     let biggerGroup = [];
@@ -32,12 +37,20 @@ sentencesGroupIsAnArray.forEach(outerSentence => {
             biggerGroup = [...new Set(biggerGroup)];
         }
     })
-    finalSentences.push({letter_pair: outerSentence.letter_pair, group: biggerGroup})
+    almostFinalSentences.push({letter_pair: outerSentence.letter_pair, group: biggerGroup})
       
 });
 
 
-// write finalSentences to file
+// 3. convert group property BACK to string (from array)
+finalSentences = []
+almostFinalSentences.forEach(sentence => {
+    const localGroup = sentence.group.join(', ')
+    finalSentences.push({letter_pair: sentence.letter_pair, group: localGroup})
+})
+
+
+// 4. write finalSentences to file
 fs.writeFile('groups-output.json', JSON.stringify(finalSentences), function (err) {
     if (err) throw err;
     console.log('Saved!');
